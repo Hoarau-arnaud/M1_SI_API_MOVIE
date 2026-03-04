@@ -1,138 +1,248 @@
 openapi: 3.0.3
 info:
-  title: API de Gestion des Chiens
-  description: |
-    API REST permettant la gestion des chiens dans le système.
-    Cette API permet de créer, lire, mettre à jour et supprimer des informations sur les chiens.
+  title: Movie API
   version: 1.0.0
-  contact:
-    name: Support API
-    email: support@example.com
+  description: API de gestion des films + genres
 
 servers:
-  - url: http://localhost:8080
-    description: Serveur de développement local
+  - url: http://localhost:8082
 
 tags:
-  - name: dogs
-    description: Opérations liées à la gestion des chiens
+  - name: movies
+    description: Gestion des films
+  - name: genres
+    description: Gestion des genres
 
 paths:
-  /dogs:
+  /api/movies:
     get:
-      tags:
-        - dogs
-      summary: Récupère tous les chiens
-      description: Retourne la liste complète des chiens enregistrés dans le système
-      operationId: getAllDogs
+      tags: [movies]
+      summary: Liste des films
       responses:
-        '200':
-          description: Liste des chiens récupérée avec succès
+        "200":
+          description: OK
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/DogDto'
-        '500':
-          description: Erreur serveur interne
-
+                  $ref: "#/components/schemas/MovieDto"
     post:
-      tags:
-        - dogs
-      summary: Crée un nouveau chien
-      description: Ajoute un nouveau chien dans le système
-      operationId: createDog
+      tags: [movies]
+      summary: Créer un film
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/DogDto'
+              $ref: "#/components/schemas/MovieDto"
       responses:
-        '201':
-          description: Chien créé avec succès
+        "200":
+          description: OK (créé)
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DogDto'
-        '400':
-          description: Données invalides
-        '500':
-          description: Erreur serveur interne
+                $ref: "#/components/schemas/MovieDto"
 
-  /dogs/{id}:
+  /api/movies/{id}:
     get:
-      tags:
-        - dogs
-      summary: Récupère un chien par son ID
-      description: Retourne les détails d'un chien spécifique
-      operationId: getDogById
+      tags: [movies]
+      summary: Détail film
       parameters:
         - name: id
           in: path
-          description: ID du chien à récupérer
           required: true
-          schema:
-            type: integer
-            format: int64
+          schema: { type: integer, format: int64 }
       responses:
-        '200':
-          description: Chien trouvé
+        "200":
+          description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DogDto'
-        '404':
-          description: Chien non trouvé
-        '500':
-          description: Erreur serveur interne
-
-    delete:
-      tags:
-        - dogs
-      summary: Supprime un chien
-      description: Supprime un chien du système par son ID
-      operationId: deleteDog
+                $ref: "#/components/schemas/MovieDto"
+        "404":
+          description: Non trouvé
+    put:
+      tags: [movies]
+      summary: Modifier film
       parameters:
         - name: id
           in: path
-          description: ID du chien à supprimer
           required: true
-          schema:
-            type: integer
-            format: int64
+          schema: { type: integer, format: int64 }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MovieDto"
       responses:
-        '200':
-          description: Chien supprimé avec succès
+        "200":
+          description: OK (modifié)
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MovieDto"
+
+  /api/movies/{id}/open:
+    put:
+      tags: [movies]
+      summary: Ouvrir un film à la location (avec prix)
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: integer, format: int64 }
+        - name: prix
+          in: query
+          required: true
+          schema: { type: number, format: double }
+      responses:
+        "200":
+          description: Film ouvert
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MovieDto"
+
+  /api/movies/{id}/close:
+    put:
+      tags: [movies]
+      summary: Fermer un film à la location
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: integer, format: int64 }
+      responses:
+        "200":
+          description: Film fermé
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MovieDto"
+
+  /api/genres:
+    get:
+      tags: [genres]
+      summary: Liste des genres
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Genre"
+    post:
+      tags: [genres]
+      summary: Créer un genre (optionnel/admin)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GenreCreateRequest"
+      responses:
+        "200":
+          description: OK (créé)
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Genre"
+
+  /api/genres/{id}:
+    get:
+      tags: [genres]
+      summary: Détail genre
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: integer, format: int64 }
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Genre"
+        "404":
+          description: Non trouvé
+    delete:
+      tags: [genres]
+      summary: Supprimer un genre (optionnel)
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: integer, format: int64 }
+      responses:
+        "200":
+          description: OK
           content:
             application/json:
               schema:
                 type: boolean
-        '404':
-          description: Chien non trouvé
-        '500':
-          description: Erreur serveur interne
 
 components:
   schemas:
-    DogDto:
+    MovieDto:
       type: object
-      description: Représentation d'un chien dans le système
       properties:
         id:
           type: integer
           format: int64
-          description: Identifiant unique du chien
-          example: 1
+          nullable: true
+        titre:
+          type: string
+        annee:
+          type: integer
+          nullable: true
+        ageMinimum:
+          type: integer
+          nullable: true
+        ouvertLocation:
+          type: boolean
+          nullable: true
+        prixLocation:
+          type: number
+          format: double
+          nullable: true
+        realisateurId:
+          type: integer
+          format: int64
+          nullable: true
+        acteurIds:
+          type: array
+          items:
+            type: integer
+            format: int64
+          nullable: true
+        genres:
+          type: array
+          items:
+            type: string
+          nullable: true
+      required:
+        - titre
+
+    Genre:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
         name:
           type: string
-          description: Nom du chien
-          example: "Rex"
-        race:
-          type: string
-          description: Race du chien
-          example: "Berger Allemand"
       required:
         - name
-        - race 
+
+    GenreCreateRequest:
+      type: object
+      properties:
+        name:
+          type: string
+      required:
+        - name

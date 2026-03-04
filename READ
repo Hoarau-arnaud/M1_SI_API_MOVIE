@@ -1,0 +1,28 @@
+
+http://localhost:8082/swagger-ui/index.html
+http://localhost:8082/v3/api-docs
+
+POST http://localhost:8082/api/movies
+{
+  "titre": "Inception",
+  "annee": 2010,
+  "ageMinimum": 12,
+  "realisateurId": 1,
+  "acteurIds": [2],
+  "genres": ["Science-Fiction", "Thriller"]
+}
+
+GET http://localhost:8082/api/movies
+GET http://localhost:8082/api/movies/1
+PUT http://localhost:8082/api/movies/1/open?prix=4.99
+PUT http://localhost:8082/api/movies/1/close
+
+PUT http://localhost:8082/api/movies/1
+{
+  "titre": "Inception (2010)",
+  "annee": 2010,
+  "ageMinimum": 12,
+  "realisateurId": 1,
+  "acteurIds": [2],
+  "genres": ["Science-Fiction", "Thriller", "Action"]
+}
