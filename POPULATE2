@@ -1,0 +1,3 @@
+PUT http://localhost:8082/api/movies/1/open?prix=4.99
+PUT http://localhost:8082/api/movies/2/open?prix=3.99
+PUT http://localhost:8082/api/movies/3/open?prix=5.99

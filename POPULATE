@@ -1,0 +1,80 @@
+{
+  "titre": "Inception (2010)",
+  "annee": 2010,
+  "ageMinimum": 12,
+  "realisateurId": 1,
+  "acteurIds": [6, 7],
+  "genres": ["Science-Fiction", "Thriller", "Action"]
+}
+{
+  "titre": "Interstellar (2014)",
+  "annee": 2014,
+  "ageMinimum": 10,
+  "realisateurId": 1,
+  "acteurIds": [11, 8],
+  "genres": ["Science-Fiction", "Drame"]
+}
+{
+  "titre": "Dune (2021)",
+  "annee": 2021,
+  "ageMinimum": 12,
+  "realisateurId": 4,
+  "acteurIds": [13, 14],
+  "genres": ["Science-Fiction", "Aventure"]
+}
+{
+  "titre": "Pulp Fiction (1994)",
+  "annee": 1994,
+  "ageMinimum": 16,
+  "realisateurId": 2,
+  "acteurIds": [9, 12],
+  "genres": ["Crime", "Drame"]
+}
+{
+  "titre": "Kill Bill Vol. 1 (2003)",
+  "annee": 2003,
+  "ageMinimum": 16,
+  "realisateurId": 2,
+  "acteurIds": [12],
+  "genres": ["Action", "Thriller"]
+}
+{
+  "titre": "Lost in Translation (2003)",
+  "annee": 2003,
+  "ageMinimum": 12,
+  "realisateurId": 19,
+  "acteurIds": [10],
+  "genres": ["Comédie", "Drame"]
+}
+{
+  "titre": "La La Land (2016)",
+  "annee": 2016,
+  "ageMinimum": 10,
+  "realisateurId": 3,
+  "acteurIds": [15],
+  "genres": ["Musical", "Romance"]
+}
+{
+  "titre": "Princess Mononoke (1997)",
+  "annee": 1997,
+  "ageMinimum": 10,
+  "realisateurId": 5,
+  "acteurIds": [],
+  "genres": ["Animation", "Aventure", "Fantastique"]
+}
+{
+  "titre": "Fight Club (1999)",
+  "annee": 1999,
+  "ageMinimum": 16,
+  "realisateurId": 4,
+  "acteurIds": [9],
+  "genres": ["Drame", "Thriller"]
+}
+{
+  "titre": "The Dark Knight (2008)",
+  "annee": 2008,
+  "ageMinimum": 12,
+  "realisateurId": 1,
+  "acteurIds": [11],
+  "genres": ["Action", "Crime", "Thriller"]
+}
